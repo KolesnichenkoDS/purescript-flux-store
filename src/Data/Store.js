@@ -11,7 +11,7 @@ exports.createStore = function(reducer) {
       var dispatch = function(action) {
         state = reducer(state)(action);
         listeners.forEach(function(l) {
-          l();
+          l(state)();
         });
       };
 

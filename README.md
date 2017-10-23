@@ -29,10 +29,12 @@ reducer s Dec = s - 1
 main :: forall e. Eff (console :: CONSOLE, store :: STORE | e) Unit
 main = do
   store <- createStore reducer initialState
+  subscribe store $ \x -> log $ "new state: " <> show x
   dispatch store Inc
   dispatch store Inc
-  x <- getState store   -- 2
-  log $ show x
+  dispatch store Dec
+  x <- getState store
+  log $ "final state: " <> show x
 ```
 
 ## TODO
